@@ -558,7 +558,7 @@ class EXTRANODES_NG_mathexpression(bpy.types.GeometryNodeCustomGroup):
         return None 
 
     def copy(self,node,):
-        """fct run when dupplicating the node"""
+        """fct run when duplicating the node"""
         
         self.node_tree = node.node_tree.copy()
         
