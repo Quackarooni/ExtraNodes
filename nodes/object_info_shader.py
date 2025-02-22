@@ -57,10 +57,10 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
     def tree_name(self):
         if self.use_self:
             return f".{self.bl_idname} - Self"
-        elif (obj := self.target_obj) is not None:
-            return f".{self.bl_idname} - {obj.name}"
-        else:
+        elif (obj := self.target_obj) is None:
             return f".{self.bl_idname}"
+        else:
+            return f".{self.bl_idname} - {obj.name}"
 
     def init(self, context):
         """this fct run when appending the node for the first time"""
