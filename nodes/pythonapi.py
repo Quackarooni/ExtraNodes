@@ -6,6 +6,7 @@ import bpy
 
 from ..__init__ import get_addon_prefs
 from .boiler import create_new_nodegroup, set_socket_defvalue, get_socket_type, set_socket_type, set_socket_label, get_socket_defvalue
+from .utils import debug_draw_group
 
 from mathutils import * # Conveniences vars for 'GeometryNodeExtraNodesPythonApi' 
 from math import *      # Needed to eval user python expression (cannot import a wildcard within the class).
@@ -238,6 +239,9 @@ class EXTRANODES_NG_pythonapi(bpy.types.GeometryNodeCustomGroup):
         row = layout.row()
         row.alert = self.evaluation_error
         row.prop(self,"user_expression",text="",)
+
+        if get_addon_prefs("debug"):
+            debug_draw_group(self, layout)
 
         return None
 

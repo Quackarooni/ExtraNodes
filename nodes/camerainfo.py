@@ -6,6 +6,7 @@ import bpy
 
 from ..__init__ import get_addon_prefs
 from .boiler import create_new_nodegroup, set_socket_defvalue
+from .utils import debug_draw_group
 
 
 class EXTRANODES_NG_camerainfo(bpy.types.GeometryNodeCustomGroup):
@@ -104,6 +105,9 @@ class EXTRANODES_NG_camerainfo(bpy.types.GeometryNodeCustomGroup):
         else: sub.prop(self, "camera_obj", text="", icon="CAMERA_DATA")
         
         row.prop(self, "use_scene_cam", text="", icon="SCENE_DATA")
+
+        if get_addon_prefs("debug"):
+            debug_draw_group(self, layout)
 
         return None
 

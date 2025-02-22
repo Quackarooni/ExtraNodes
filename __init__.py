@@ -14,10 +14,12 @@
 import bpy, sys
 
 
-def get_addon_prefs():
-    """get preferences path from base_package, __package__ path change from submodules"""
-    return bpy.context.preferences.addons[__package__].preferences
-
+def get_addon_prefs(attr_id=None):
+    prefs = bpy.context.preferences.addons[__package__].preferences
+    if attr_id is None:
+        return prefs
+    else:
+        return getattr(prefs, attr_id)
 
 def cleanse_modules():
     """remove all plugin modules from sys.modules for a clean uninstall"""

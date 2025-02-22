@@ -6,6 +6,7 @@ import bpy
 
 from ..__init__ import get_addon_prefs
 from .boiler import create_new_nodegroup
+from .utils import debug_draw_group
 
 
 class EXTRANODES_NG_isrenderedview(bpy.types.GeometryNodeCustomGroup):
@@ -46,6 +47,8 @@ class EXTRANODES_NG_isrenderedview(bpy.types.GeometryNodeCustomGroup):
 
     def draw_buttons(self, context, layout,):
         """node interface drawing"""
+        if get_addon_prefs("debug"):
+            debug_draw_group(self, layout)
         
         return None 
 

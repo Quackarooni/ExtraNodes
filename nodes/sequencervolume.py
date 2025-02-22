@@ -6,7 +6,7 @@ import bpy
 
 from ..__init__ import get_addon_prefs
 from .boiler import create_new_nodegroup, set_socket_defvalue
-
+from .utils import debug_draw_group
 
 class EXTRANODES_NG_sequencervolume(bpy.types.GeometryNodeCustomGroup):
     """Custom Nodegroup: Evaluate the sound level of the VideoSequencer editor.
@@ -136,7 +136,9 @@ class EXTRANODES_NG_sequencervolume(bpy.types.GeometryNodeCustomGroup):
 
     def draw_buttons(self,context,layout,):
         """node interface drawing"""
-        
+
+        if get_addon_prefs("debug"):
+            debug_draw_group(self, layout)
         #for later?
         #layout.prop(self,"frame_delay",text="Frame Delay")
 

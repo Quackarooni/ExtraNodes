@@ -6,6 +6,7 @@ import bpy
 
 from .. import get_addon_prefs
 from .boiler import create_new_nodegroup, link_sockets
+from .utils import debug_draw_group
 
 
 class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
@@ -145,7 +146,9 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
             sub.prop(self, "target_obj", text="", icon="OBJECT_DATA")
         
         row.prop(self, "use_self", text="", icon="SCENE_DATA")
-        layout.prop(self, "node_tree")
+        
+        if get_addon_prefs("debug"):
+            debug_draw_group(self, layout)
 
         return None
 

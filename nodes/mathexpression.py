@@ -17,6 +17,7 @@ from functools import partial
 
 from ..__init__ import get_addon_prefs
 from .boiler import create_new_nodegroup, create_socket, remove_socket, link_sockets, replace_node
+from .utils import debug_draw_group
 
 
 NODE_Y_OFFSET = 120
@@ -750,7 +751,10 @@ class EXTRANODES_NG_mathexpression(bpy.types.GeometryNodeCustomGroup):
             lbl.label(text=self.error_message)
         
         layout.separator(factor=0.75)
-        
+
+        if get_addon_prefs("debug"):
+            debug_draw_group(self, layout)
+
         return None
 
     def draw_buttons_ext(self, context, layout):
