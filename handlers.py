@@ -26,6 +26,9 @@ def extranodes_handler_depspost(scene,desp):
             
     #need to update camera nodes outputs
     EXTRANODES_NG_camerainfo.update_all()
+
+    #update object info shader
+    EXTRANODES_NG_object_info_shader.update_all()
     return None
 
 
@@ -89,20 +92,7 @@ def msgbus_viewportshading_callback(*args):
     if (ng):
         set_socket_defvalue(ng, 0, value=is_rendered_view(),)
 
-    return None 
-
-
-OBJNAME_OWNER = object()
-
-
-def msgbus_obj_name_callback(*args):
-    sett_plugin = get_addon_prefs()
-    
-    if (sett_plugin.debug_depsgraph):
-        print("msgbus_obj_name_callback(): msgbus signal")
-
-    EXTRANODES_NG_object_info_shader.update_all()
-    return None 
+    return None
 
 
 def all_handlers(name=False):
@@ -132,15 +122,6 @@ def register_handlers_and_msgbus():
         args=(None,),
         options={"PERSISTENT"},
         )
-
-    bpy.msgbus.subscribe_rna(
-        key=(bpy.types.Object, "name"),
-        owner=OBJNAME_OWNER,
-        notify=msgbus_obj_name_callback,
-        args=(None,),
-        options={"PERSISTENT"},
-        )
-
     return None 
 
 
@@ -156,6 +137,5 @@ def unregister_handlers_and_msgbus():
     
     #remove msgbus
     bpy.msgbus.clear_by_owner(VIEWPORTSHADING_OWNER)
-    bpy.msgbus.clear_by_owner(OBJNAME_OWNER)
     
     return None
