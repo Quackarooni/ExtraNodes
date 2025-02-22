@@ -98,11 +98,10 @@ def remove_socket(ng, idx, in_out='OUTPUT',):
     return None 
 
 
-def create_new_nodegroup(name, in_sockets={}, out_sockets={},):
+def create_new_nodegroup(name, in_sockets={}, out_sockets={}, tree_type='GeometryNodeTree'):
     """create new nodegroup with outputs from given dict {"name":"type",}"""
 
-    ng = bpy.data.node_groups.new(name=name, type='GeometryNodeTree',)
-    
+    ng = bpy.data.node_groups.new(name=name, type=tree_type)
     #create main input/output
     in_node = ng.nodes.new('NodeGroupInput')
     in_node.location.x -= 200
@@ -116,6 +115,7 @@ def create_new_nodegroup(name, in_sockets={}, out_sockets={},):
         create_socket(ng, in_out='OUTPUT', socket_type=socket_type, socket_name=socket_name,)
         
     return ng
+
 
 def link_sockets(socket1, socket2):
     """link two nodes together in a nodetree"""

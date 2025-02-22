@@ -54,12 +54,22 @@ def register():
     
     from .menus import append_menus
     append_menus()
+
+    bpy.types.Object.EN_euler_rotation = bpy.props.FloatVectorProperty(
+        name="Euler Rotation (Extra Nodes)",
+        description="Helper property for getting an object's euler rotation, used by the Extra Nodes Addon",
+        subtype="EULER",
+        unit="ROTATION",
+        precision=5,
+        get=lambda self : self.matrix_world.to_euler('XYZ') if self.rotation_mode in {'AXIS_ANGLE', 'QUATERNION'} else self.rotation_euler
+    )
     
     return None
 
 
 def unregister():
     """main addon un-register"""
+    del bpy.types.Object.EN_euler_rotation
 
     from .menus import remove_menus
     remove_menus()

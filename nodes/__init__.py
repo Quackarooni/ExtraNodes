@@ -21,6 +21,7 @@ gn_node_classes = (
 )
 
 sh_node_classes = (
+    EXTRANODES_NG_object_info_shader,
 )
 
 
