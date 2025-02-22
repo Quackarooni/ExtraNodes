@@ -5,7 +5,7 @@
 
 import bpy 
 
-from .nodes import classes as nodeclasses
+from .nodes import gn_node_classes, sh_node_classes
 
 
 class EXTRANODES_MT_addmenu_general(bpy.types.Menu):
@@ -15,11 +15,19 @@ class EXTRANODES_MT_addmenu_general(bpy.types.Menu):
 
     @classmethod
     def poll(cls, context):
-        return (bpy.context.space_data.tree_type == 'GeometryNodeTree')
+        return (context.space_data.tree_type in {'GeometryNodeTree', 'ShaderNodeTree'})
 
     def draw(self, context):
+        tree_type = context.space_data.tree_type
         
-        for cls in nodeclasses:
+        if tree_type == 'GeometryNodeTree':
+            classes = gn_node_classes
+        elif tree_type == 'ShaderNodeTree':
+            classes = sh_node_classes
+        else:
+            raise ValueError(f"{tree_type} is not a supported node tree type")
+
+        for cls in classes:
             if ('_NG_' in cls.__name__):
                 op = self.layout.operator("node.add_node", text=cls.bl_label,)
                 op.type = cls.bl_idname
