@@ -8,14 +8,13 @@ import bpy
 from collections.abc import Iterable
 
 from .__init__ import get_addon_prefs
-from .nodes import EXTRANODES_NG_camerainfo, EXTRANODES_NG_pythonapi, EXTRANODES_NG_sequencervolume
+from .nodes import EXTRANODES_NG_camerainfo, EXTRANODES_NG_pythonapi, EXTRANODES_NG_sequencervolume, EXTRANODES_NG_object_info_shader
 from .nodes.boiler import set_socket_defvalue
 
 
 @bpy.app.handlers.persistent
 def extranodes_handler_depspost(scene,desp):
     """update on depsgraph change"""
-    
     sett_plugin = get_addon_prefs()
     
     if (sett_plugin.debug_depsgraph):
@@ -27,7 +26,6 @@ def extranodes_handler_depspost(scene,desp):
             
     #need to update camera nodes outputs
     EXTRANODES_NG_camerainfo.update_all()
-
     return None
 
 
@@ -94,6 +92,19 @@ def msgbus_viewportshading_callback(*args):
     return None 
 
 
+OBJNAME_OWNER = object()
+
+
+def msgbus_obj_name_callback(*args):
+    sett_plugin = get_addon_prefs()
+    
+    if (sett_plugin.debug_depsgraph):
+        print("msgbus_obj_name_callback(): msgbus signal")
+
+    EXTRANODES_NG_object_info_shader.update_all()
+    return None 
+
+
 def all_handlers(name=False):
     """return a list of handler stored in .blend""" 
 
@@ -121,7 +132,15 @@ def register_handlers_and_msgbus():
         args=(None,),
         options={"PERSISTENT"},
         )
-        
+
+    bpy.msgbus.subscribe_rna(
+        key=(bpy.types.Object, "name"),
+        owner=OBJNAME_OWNER,
+        notify=msgbus_obj_name_callback,
+        args=(None,),
+        options={"PERSISTENT"},
+        )
+
     return None 
 
 
@@ -137,5 +156,6 @@ def unregister_handlers_and_msgbus():
     
     #remove msgbus
     bpy.msgbus.clear_by_owner(VIEWPORTSHADING_OWNER)
+    bpy.msgbus.clear_by_owner(OBJNAME_OWNER)
     
     return None

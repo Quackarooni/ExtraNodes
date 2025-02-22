@@ -172,8 +172,10 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
     @classmethod
     def update_all(cls):
         """search for all nodes of this type and update them"""
-        
-        for n in [n for ng in bpy.data.node_groups for n in ng.nodes if (n.bl_idname==cls.bl_idname)]:
-            n.update()
-            
+        for material in bpy.data.materials:
+            if (nodes := getattr(material.node_tree, "nodes", None)) is not None:
+                for node in nodes:
+                    if node.bl_idname==cls.bl_idname:
+                        node.update()
+
         return None 
