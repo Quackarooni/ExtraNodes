@@ -52,12 +52,20 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
     def poll(cls, context):
         """mandatory poll"""
         return True
+    
+    @property
+    def tree_name(self):
+        if self.use_self:
+            return f".{self.bl_idname} - Self"
+        elif (obj := self.target_obj) is not None:
+            return f".{self.bl_idname} - {obj.name}"
+        else:
+            return f".{self.bl_idname}"
 
     def init(self, context):
         """this fct run when appending the node for the first time"""
 
-        name = f".{self.bl_idname}"
-
+        name = self.tree_name
         ng = bpy.data.node_groups.get(name)
         if (ng is None):
             out_sockets = {
@@ -81,9 +89,6 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
                 for sock in node.outputs:
                     sock.hide = True
                 link_sockets(src, target)
-                
-
-        ng = ng.copy() #always using a copy of the original ng
         
         self.node_tree = ng
         self.label = self.bl_label
@@ -92,13 +97,21 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
 
     def copy(self, node):
         """fct run when duplicating the node"""
-        
-        self.node_tree = node.node_tree.copy()
-        
         return None
 
+    def update_node_tree(self):
+        tree = bpy.data.node_groups.get(self.tree_name)
+        if (tree is None):
+            tree = self.node_tree.copy()
+            tree.name = self.tree_name
+
+        if (tree.name != self.node_tree.name):
+            self.node_tree = tree
+
+        return tree
+
     def update(self):
-        tree = self.node_tree
+        tree = self.update_node_tree()
 
         if not self.use_self:
             for target_name, target_data in self.sockets.items():
@@ -132,6 +145,7 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
             sub.prop(self, "target_obj", text="", icon="OBJECT_DATA")
         
         row.prop(self, "use_self", text="", icon="SCENE_DATA")
+        layout.prop(self, "node_tree")
 
         return None
 
