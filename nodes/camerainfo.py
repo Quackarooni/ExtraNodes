@@ -9,12 +9,12 @@ from .boiler import create_new_nodegroup, set_socket_defvalue
 
 
 class EXTRANODES_NG_camerainfo(bpy.types.GeometryNodeCustomGroup):
-    """Custom Nodgroup: Gather informations about any camera.
+    """Custom Nodegroup: Gather informations about any camera.
     By default the camera will always use the active camera.
     Expect updates on each depsgraph post and frame_pre update signals"""
 
     bl_idname = "GeometryNodeExtraNodesCameraInfo"
-    bl_label = "Camera info"
+    bl_label = "Camera Info"
 
     use_scene_cam: bpy.props.BoolProperty(
         default=True,

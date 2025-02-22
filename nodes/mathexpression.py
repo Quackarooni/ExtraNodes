@@ -488,7 +488,7 @@ class FunctionTransformer(ast.NodeTransformer):
 
 
 class EXTRANODES_NG_mathexpression(bpy.types.GeometryNodeCustomGroup):
-    """Custom Nodgroup: Evaluate a math expression using float math nodes.
+    """Custom Nodegroup: Evaluate a math expression using float math nodes.
     Under the hood, the expression will be sanarized, the transformed into functions that will be executed to create a new nodetree.
     The nodetree will be recomposed on each expression keystrokes"""
     

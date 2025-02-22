@@ -12,12 +12,12 @@ from math import *      # Needed to eval user python expression (cannot import a
 
 
 class EXTRANODES_NG_pythonapi(bpy.types.GeometryNodeCustomGroup):
-    """Custom Nodgroup: Evaluate a python expression as a single value output.
+    """Custom Nodegroup: Evaluate a python expression as a single value output.
     The evaluated type can be of type 'float', 'int', 'string', 'object', 'collection', 'material'.
     By default the values will be updated automatically on each on depsgraph post and frame_pre signals"""
     
     bl_idname = "GeometryNodeExtraNodesPythonApi"
-    bl_label = "Python Api"
+    bl_label = "Python API"
 
     evaluation_error : bpy.props.BoolProperty(
         default=False,

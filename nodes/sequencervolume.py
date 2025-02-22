@@ -9,7 +9,7 @@ from .boiler import create_new_nodegroup, set_socket_defvalue
 
 
 class EXTRANODES_NG_sequencervolume(bpy.types.GeometryNodeCustomGroup):
-    """Custom Nodgroup: Evaluate the sound level of the VideoSequencer editor.
+    """Custom Nodegroup: Evaluate the sound level of the VideoSequencer editor.
     Expect the value to be automatically updated on each on depsgraph post signals"""
     
     bl_idname = "GeometryNodeExtraNodesSequencerVolume"

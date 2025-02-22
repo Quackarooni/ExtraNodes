@@ -9,7 +9,7 @@ from .boiler import create_new_nodegroup
 
 
 class EXTRANODES_NG_isrenderedview(bpy.types.GeometryNodeCustomGroup):
-    """Custom Nodgroup: Evaluate if any 3Dviewport is in rendered view mode.
+    """Custom Nodegroup: Evaluate if any 3Dviewport is in rendered view mode.
     The value is evaluated from depsgraph post update signals"""
     
     bl_idname = "GeometryNodeExtraNodesIsRenderedView"
