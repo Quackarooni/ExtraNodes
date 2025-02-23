@@ -33,15 +33,15 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
         update=update_callback,
         )
 
-    def active_obj_callback(self, context):
-        if self.active_obj != "Self Object":
-            self.active_obj = "Self Object"
+    def use_self_label_callback(self, context):
+        if self.use_self_label != "Self Object":
+            self.use_self_label = "Self Object"
 
         print(self)
 
-    active_obj : bpy.props.StringProperty(
+    use_self_label : bpy.props.StringProperty(
         default="Self Object",
-        update=active_obj_callback
+        update=use_self_label_callback
     )
 
     sockets = {
@@ -142,7 +142,7 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
         sub = row.row(align=True)
         sub.enabled = not self.use_self
         if (self.use_self):
-            sub.prop(self, "active_obj", text="", icon="OBJECT_DATA")
+            sub.prop(self, "use_self_label", text="", icon="OBJECT_DATA")
         else: 
             sub.prop(self, "target_obj", text="", icon="OBJECT_DATA")
         
@@ -161,7 +161,7 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
         sub.active = not self.use_self
         
         if (self.use_self):
-            sub.prop(self, "active_obj", text="", icon="OBJECT_DATA")
+            sub.prop(self, "use_self_label", text="", icon="OBJECT_DATA")
         else: 
             sub.prop(self, "target_obj", text="", icon="OBJECT_DATA")
         
