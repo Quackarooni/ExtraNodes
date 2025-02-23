@@ -506,6 +506,7 @@ class EXTRANODES_NG_mathexpression(bpy.types.GeometryNodeCustomGroup):
     
     bl_idname = "GeometryNodeExtraMathExpression"
     bl_label = "Math Expression"
+    bl_width_default = 220
 
     error_message : bpy.props.StringProperty()
     debug_sanatized : bpy.props.StringProperty()
@@ -550,7 +551,6 @@ class EXTRANODES_NG_mathexpression(bpy.types.GeometryNodeCustomGroup):
         ng = ng.copy() #always using a copy of the original ng
 
         self.node_tree = ng
-        self.width = 250
         self.label = self.bl_label
 
         #initialize default expression

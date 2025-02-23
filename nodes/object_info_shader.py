@@ -16,7 +16,8 @@ class EXTRANODES_NG_object_info_shader(bpy.types.ShaderNodeCustomGroup):
 
     bl_idname = "ShaderNodeExtraNodesObjectInfo"
     bl_label = "Object Info"
-
+    bl_width_default = 140
+    
     def update_callback(self, context):
         self.update()
 

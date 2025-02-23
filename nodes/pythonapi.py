@@ -19,6 +19,7 @@ class EXTRANODES_NG_pythonapi(bpy.types.GeometryNodeCustomGroup):
     
     bl_idname = "GeometryNodeExtraNodesPythonApi"
     bl_label = "Python API"
+    bl_width_default = 175
 
     evaluation_error : bpy.props.BoolProperty(
         default=False,
@@ -64,7 +65,6 @@ class EXTRANODES_NG_pythonapi(bpy.types.GeometryNodeCustomGroup):
         ng = ng.copy() #always using a copy of the original ng
 
         self.node_tree = ng
-        self.width = 250
         self.label = self.bl_label
 
         #mark an update signal so handler fct do not need to loop every single nodegroups

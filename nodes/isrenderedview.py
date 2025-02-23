@@ -15,6 +15,7 @@ class EXTRANODES_NG_isrenderedview(bpy.types.GeometryNodeCustomGroup):
     
     bl_idname = "GeometryNodeExtraNodesIsRenderedView"
     bl_label = "Is Rendered View"
+    bl_width_default = 155
 
     @classmethod
     def poll(cls, context):
@@ -35,7 +36,6 @@ class EXTRANODES_NG_isrenderedview(bpy.types.GeometryNodeCustomGroup):
             )
 
         self.node_tree = ng
-        self.width = 140
         self.label = self.bl_label
 
         return None 

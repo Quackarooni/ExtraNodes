@@ -14,6 +14,7 @@ class EXTRANODES_NG_sequencervolume(bpy.types.GeometryNodeCustomGroup):
     
     bl_idname = "GeometryNodeExtraNodesSequencerVolume"
     bl_label = "Sequencer Volume"
+    bl_width_default = 155
 
     # frame_delay : bpy.props.IntProperty()
 
@@ -38,7 +39,6 @@ class EXTRANODES_NG_sequencervolume(bpy.types.GeometryNodeCustomGroup):
         ng = ng.copy() #always using a copy of the original ng
          
         self.node_tree = ng
-        self.width = 150
         self.label = self.bl_label
 
         return None 

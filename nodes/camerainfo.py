@@ -16,6 +16,7 @@ class EXTRANODES_NG_camerainfo(bpy.types.GeometryNodeCustomGroup):
 
     bl_idname = "GeometryNodeExtraNodesCameraInfo"
     bl_label = "Camera Info"
+    bl_width_default = 150
 
     use_scene_cam: bpy.props.BoolProperty(
         default=True,
