@@ -50,6 +50,10 @@ class EXTRANODES_NG_sequencervolume(bpy.types.GeometryNodeCustomGroup):
         
         return None 
     
+    def free(self):
+        if self.node_tree.users <= 1:
+            bpy.data.node_groups.remove(self.node_tree)
+    
     def update(self):
         """generic update function"""
         

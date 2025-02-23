@@ -69,6 +69,10 @@ class EXTRANODES_NG_camerainfo(bpy.types.GeometryNodeCustomGroup):
         self.node_tree = node.node_tree.copy()
         
         return None
+    
+    def free(self):
+        if self.node_tree.users <= 1:
+            bpy.data.node_groups.remove(self.node_tree)
 
     def update(self):
         """generic update function"""
