@@ -56,8 +56,8 @@ class EXTRANODES_NG_camerainfo(bpy.types.GeometryNodeCustomGroup):
                     "Resolution Y" : "NodeSocketInt",
                 },
             )
-         
-        ng = ng.copy() #always using a copy of the original ng
+        else:
+            ng = ng.copy() #always using a copy of the original ng
         
         self.node_tree = ng
         self.label = self.bl_label

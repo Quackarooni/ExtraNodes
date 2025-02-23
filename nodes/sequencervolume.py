@@ -35,8 +35,8 @@ class EXTRANODES_NG_sequencervolume(bpy.types.GeometryNodeCustomGroup):
                     "Volume" : "NodeSocketFloat",
                 },
             )
-            
-        ng = ng.copy() #always using a copy of the original ng
+        else:
+            ng = ng.copy() #always using a copy of the original ng
          
         self.node_tree = ng
         self.label = self.bl_label

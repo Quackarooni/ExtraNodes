@@ -61,8 +61,8 @@ class EXTRANODES_NG_pythonapi(bpy.types.GeometryNodeCustomGroup):
                     "Error" : "NodeSocketBool",
                 },
             )
-         
-        ng = ng.copy() #always using a copy of the original ng
+        else:
+            ng = ng.copy() #always using a copy of the original ng
 
         self.node_tree = ng
         self.label = self.bl_label

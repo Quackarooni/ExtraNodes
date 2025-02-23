@@ -547,8 +547,8 @@ class EXTRANODES_NG_mathexpression(bpy.types.GeometryNodeCustomGroup):
                     "Result" : "NodeSocketFloat",
                 },
             )
-         
-        ng = ng.copy() #always using a copy of the original ng
+        else:
+            ng = ng.copy() #always using a copy of the original ng
 
         self.node_tree = ng
         self.label = self.bl_label
